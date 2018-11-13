@@ -1,0 +1,17 @@
+/////////////
+
+# Если запрос начинается с /backend, то заменяем на /backend/web/
+RewriteCond %{REQUEST_URI} ^/backend
+RewriteRule ^backend\/?(.*) /backend/web/$1
+
+# Если запрос начинается с /api, то заменяем на /api/web/
+RewriteCond %{REQUEST_URI} ^/api
+RewriteRule ^api\/?(.*) /api/web/$1
+
+# Если запрос начинается с /provider, то заменяем на /provider/web/
+RewriteCond %{REQUEST_URI} ^/provider
+RewriteRule ^provider\/?(.*) /provider/web/$1
+
+# Добавляем другой запрос /frontend/web/$1
+RewriteCond %{REQUEST_URI} !^/(frontend/web|backend/web|provider/web|api/web|backend|api|provider)
+RewriteRule (.*) /frontend/web/$1
